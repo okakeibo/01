@@ -1,6 +1,5 @@
 <form id="okakeibo" action="https://docs.google.com/forms/d/e/1FAIpQLSeLQ4pQ5xdWzNzDAR3whyzE7lijRt64BwTVLqTx5L49NTB7Hw/formResponse" method="POST" target="hidden_iframe" onsubmit="submitForm()">
-  <label>店舗 名称 金額 記号:</label><input type="text" id="text01" name="entry.1752744726
-  "><br>
+  <label>店舗 名称 金額 記号:</label><input type="text" id="text01" name="entry.1752744726"><br>
   <label>決済手段01:</label>
   <select name="entry.799936107" id="pulldown" onchange="showOtherOption(this.value)">
     <option value="6gram">MIXIM</option>
@@ -85,14 +84,22 @@ function myFunction0001() {
 }
 </script>
 
+<style>
+  #seekbar {
+    background: linear-gradient(to right, #00ccff 100%, transparent 0%);
+    background-size: 100% 100%;
+    height: 10px;
+  }
+</style>
 
+<div id="seekbar"></div>
 
 <script>
   function changeBtnColor() {
     document.getElementById("submitBtn").style.backgroundColor = "#00ccff";
     setTimeout(function(){
       document.getElementById("submitBtn").style.backgroundColor = "";
-    }, 3000);
+    }, 500);
   }
 </script>
 
