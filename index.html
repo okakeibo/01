@@ -20,9 +20,11 @@
   <label>メインカテゴリ:</label><br>
   <input type="radio" name="mainCategory" value="食費" onchange="showSubCategory(this.value)">食費<br>
   <input type="radio" name="mainCategory" value="趣味" onchange="showSubCategory(this.value)">趣味<br>
+  <input type="radio" name="mainCategory" value="その他" onchange="showSubCategory(this.value)">その他<br>
   <div id="subCategory" style="display: none;">
     <label>サブカテゴリ:</label><br>
     <div id="食費" style="display: none;">
+      <input type="radio" name="subCategory" value="雑費">雑費<br>
       <input type="radio" name="subCategory" value="学食">学食<br>
       <input type="radio" name="subCategory" value="プライベート">プライベート<br>
       <input type="radio" name="subCategory" value="集団">集団<br>
