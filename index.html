@@ -15,7 +15,7 @@
     <option value="三井住友銀行">三井住友銀行</option>   
   </select><br>
   <div id="otherOption" style="display:none">
-    <label>その他決済:</label><input type="text" name="entry.799936107"><br>
+    <label>その他決済:</label><input type="text" id="pulldown02" name="entry.799936107"><br>
   </div>
   <label>メインカテゴリ:</label><br>
   <input type="radio" name="mainCategory" value="食費" onchange="showSubCategory(this.value)">食費<br>
@@ -34,25 +34,42 @@
       <input type="radio" name="subCategory" value="機械">機械<br>
       <input type="radio" name="subCategory" value="もみじ">もみじ<br>
     </div>
+  <div id="その他" style="display:none">
+      <label></label><input type="text" id="subCategory02" name="entry.1729500685"><br>
+    </div>
   </div>
+  <label>タグ</label><input type="text" id="text02" name="entry.154782597"><br>
   <input type="hidden" name="entry.1928626912" id="entry0003" value="">
   <input type="hidden" name="entry.1729500685" id="entry0004" value="">
   <input type="submit" value="送信" id="submitBtn" onclick="myFunction0001()">
   <iframe name="hidden_iframe" style="display:none" ></iframe>
 </form>
+
+
+
 <script>
 function showOtherOption(value) {
   var otherOption = document.getElementById("otherOption");
   var pulldown = document.getElementById("pulldown")
+  var pulldown02 = document.getElementById("pulldown02")
+
   if (value === "その他") {
     otherOption.style.display = "block";
     pulldown.name = "";
+    pulldown02.name = "entry.799936107";
+
   } else {
     otherOption.style.display = "none";
     pulldown.name = "entry.799936107";
+    pulldown02.name = "";
+
   }
 }
+
+	//完成20230310
+	
 </script>
+
 <script>
   function showSubCategory(mainCategory) {
     var subCategory1 = document.getElementById("subCategory");
@@ -62,7 +79,44 @@ function showOtherOption(value) {
       subCategories1[i].parentElement.style.display = "none";
     }
     document.getElementById(mainCategory).style.display = "block";
-  }
+
+    //subCategoryを変更したらリセットします
+    for (const element of document.getElementsByName("subCategory")) {
+    element.checked = false;
+    }
+    document.getElementById("subCategory02").value = "";
+  
+
+    var otherOption02 = document.getElementById("その他");
+    var radio02 = document.getElementsByName("subCategory")
+    var radio03 = document.getElementById("subCatefory02")
+    if (mainCategory === "その他") {
+      otherOption02.style.display = "block";
+      radio02.name = "";
+      radio03.name = "entry.1729500685";
+
+    } else {
+      otherOption02.style.display = "none";
+      radio02.name = "entry.1729500685";
+      radio03.name = "";
+
+    }
+  
+  
+  	// 「subCategory」というname属性を持つラジオボタンのみを選択し、
+		// それらのcheckedプロパティをfalseに設定します。
+		var subCategoryRadios = document.getElementsByName("subCategoryxxxxx");
+		for (var i = 0; i < subCategoryRadios.length; i++) {
+			subCategoryRadios[i].checked = false;
+		}
+
+   
+ 
+ 
+ }
+	
+
+
 </script>
 <script>
   function submitForm() {
@@ -81,7 +135,7 @@ function myFunction0001() {
   submitForm01();
   changeBtnColor();
 
-
+ 
 
 }
 </script>
@@ -90,10 +144,21 @@ function myFunction0001() {
 
 <script>
   function changeBtnColor() {
-    document.getElementById("submitBtn").style.backgroundColor = "#00ccff";
-    setTimeout(function(){
-      document.getElementById("submitBtn").style.backgroundColor = "";
-    }, 3000);
+    // ボタンの背景色を青色に変更
+  document.getElementById("submitBtn").style.backgroundColor = "#00ccff";
+  
+  // 3秒間で右から左に背景色を流す
+  var width = 100;
+  var animationInterval = setInterval(function() {
+    if (width <= 0) {
+      clearInterval(animationInterval);
+      // ボタンの背景色を緑色に戻す
+      document.getElementById("submitBtn").style.backgroundColor = "#4CAF50";
+    } else {
+      width--;
+      document.getElementById("submitBtn").style.backgroundImage = "linear-gradient(to left, #00ccff " + width + "%, #4CAF50 " + width + "%)";
+    }
+  }, 30);
   }
 </script>
 
@@ -112,30 +177,60 @@ function myFunction0001() {
       document.getElementById("submitBtn").disabled = false;
     }, 3000);
 
-    //3秒後にフォームをリセットする
+    //1秒後にフォームをリセットする
     setTimeout(function(){
       document.getElementById("text01").value = "";
-    }, 3000);
+    }, 1000);
 
   }
 </script>
 
 <style>
 form {
-  width: 500px;
+  width: 400px;
   margin: 0 auto;
   text-align: left;
 }
 
 label {
-  font-size: 16px;
+  font-size: 30px;
   font-weight: bold;
   margin-right: 10px;
 }
 
-input[type="text"], select {
+input[id="text01"], select {
   height: 50px;
-  width: 180px;
+  width: 600px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+input[id="pulldown"], select {
+  height: 50px;
+  width: 162px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+input[id="otherOption"], select {
+  height: 50px;
+  width: 162px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+input[id="その他"], select {
+  height: 50px;
+  width: 162px;
   font-size: 16px;
   padding: 10px;
   border-radius: 5px;
@@ -144,15 +239,17 @@ input[type="text"], select {
 }
 
 input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 32px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
+    background-color: #4CAF50;
+    color: white;
+    padding: 60px 200px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-image: linear-gradient(to left, #4CAF50, #4CAF50);
+    background-size: 200% 100%;
+    transition: background-position 0.3s;
+  }
 #otherOption {
   display: none;
 }
